@@ -3,15 +3,14 @@ package com.rayworks.tools.javassist
 import com.android.build.api.transform.*
 import com.android.build.gradle.internal.pipeline.TransformManager
 import com.android.utils.FileUtils
-import org.apache.commons.codec.digest.DigestUtils
 import org.gradle.api.Project
 
-class JniTransform extends Transform {
+class MyTransform extends Transform {
 
     private final Project project;
     private final boolean application;
 
-    public JniTransform(Project project, boolean isApplication) {
+    public MyTransform(Project project, boolean isApplication) {
         this.project = project;
         this.application = isApplication;
     }
@@ -49,7 +48,6 @@ class JniTransform extends Transform {
     @Override
     void transform(Context context, Collection<TransformInput> inputs, Collection<TransformInput> referencedInputs, TransformOutputProvider outputProvider, boolean isIncremental)
             throws IOException, TransformException, InterruptedException {
-//        super.transform(context, inputs, referencedInputs, outputProvider, isIncremental)
 
         println(">>> transform entry")
 
@@ -63,20 +61,10 @@ class JniTransform extends Transform {
 
                 FileUtils.copyDirectory(dirInput.file, dest)
             }
-            println(">>> jar size : " + input.jarInputs.size())
 
             input.jarInputs.each { JarInput jarInput ->
-
-                def jarName = jarInput.name
-                println("jar name : $jarName")
-
-//                def md5Name = DigestUtils.md5Hex(jarInput.file.getAbsolutePath())
-//                if (jarName.endsWith(".jar")) {
-//                    jarName = jarName.substring(0, jarName.length() - 4)
-//                }
-//                def dest = outputProvider.getContentLocation(jarName + md5Name,
-//                        jarInput.contentTypes, jarInput.scopes, Format.JAR)
-//                FileUtils.copyFile(jarInput.file, dest)
+                File jar = new File(jarInput.getFile().getPath())
+                GetuiSdkInject.removeJniCheck(jar)
             }
         }
 

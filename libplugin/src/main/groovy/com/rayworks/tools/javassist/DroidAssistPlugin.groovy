@@ -28,14 +28,14 @@ class DroidAssistPlugin implements Plugin<Project> {
         if (project.plugins.hasPlugin(AppPlugin.class)) {
             AppExtension extension = project.extensions.getByType(AppExtension)
             extension.registerTransform(
-                    new JniTransform(project, true))
+                    new MyTransform(project, true))
 
             println(">>> AppPlugin registered")
         }
         if (project.plugins.hasPlugin(LibraryPlugin.class)) {
             LibraryExtension extension = project.extensions.getByType(LibraryExtension)
             extension.registerTransform(
-                    new JniTransform(project, false))
+                    new MyTransform(project, false))
         }
 
     }

@@ -17,6 +17,7 @@ repositories {
 dependencies {
     implementation localGroovy()
     implementation gradleApi()
+    implementation 'org.zeroturnaround:zt-zip:1.14'
     implementation "org.javassist:javassist:$assistVersion"
     implementation "com.android.tools.build:gradle:$androidGradleVersion"
 }
