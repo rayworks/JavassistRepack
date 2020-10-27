@@ -1,0 +1,9 @@
+src/main/resources
+../libplugin/src/main/resources
+src/main/java
+../libplugin/src/main/java
+src/main/groovy
+../libplugin/src/main/groovy
+src/test/resources
+src/test/java
+src/test/groovy

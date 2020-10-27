@@ -1,0 +1,39 @@
+plugins {
+//    id 'java-library'
+    id 'idea'
+    id 'groovy'
+}
+
+group = 'com.rayworks.tools.javassist'
+version = '1.0.0'
+project.archivesBaseName = 'libplugin'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+ext {
+    androidGradleVersion = '4.1.0'
+    assistVersion = '3.20.0-GA'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    google()
+    jcenter()
+}
+
+dependencies {
+    implementation localGroovy()
+    implementation gradleApi()
+    implementation 'commons-codec:commons-codec:1.15'
+    implementation "org.javassist:javassist:$assistVersion" //'3.24.1-GA'
+    implementation "com.android.tools.build:gradle:$androidGradleVersion"
+}
+//sourceSets {
+//    main {
+//        groovy.srcDirs = ['src/main/groovy']
+//    }
+//}
