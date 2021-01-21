@@ -6,12 +6,11 @@ class GetuiSdkInject {
     private static ClassPool classPool = new ClassPool(true)
 
     static void removeJniCheck(File jar) {
-//        File jar = new File(jarInput.getFile().getPath())
         println("path : " + jar.getPath())
 
         if(jar.getPath().contains("GetuiSDK")) {
             classPool.insertClassPath(jar.getPath())
-            classPool.insertClassPath("/Users/rayworks/Library/Android/sdk/platforms/android-30/android.jar")
+            classPool.insertClassPath("${System.getenv()['ANDROID_HOME']}/platforms/android-30/android.jar")
 
             // com.igexin.push.util.b.a(context)
             def ctClass = classPool.getCtClass("com.igexin.push.util.b")
@@ -39,6 +38,7 @@ class GetuiSdkInject {
 
             ZipUtil.replaceEntry(jar, "com/igexin/push/util/b.class", ctClass.toBytecode())
 
+            // The transformed jar path
             println(jar.getPath() + " updated")
         }
     }
